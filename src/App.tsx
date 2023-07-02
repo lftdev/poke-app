@@ -1,26 +1,33 @@
 import { useEffect, useState } from 'react'
 import Card from './components/Card'
-import { PokeJSON, Pokemon } from './services/definitions'
 function App() {
   const POKEAPI_URL = 'https://pokeapi.co/api/v2/'
-  const [json, setJSON] = useState<PokeJSON>()
-  const [pokedex, setPokedex] = useState<Pokemon[]>([])
+  const POKEMON_ENDPOINT = POKEAPI_URL + 'pokemon/'
+  
+  let generated = 0
+  function genItems(amount: number) {
+    return Array.from(Array(amount), () => {
+      generated++
+      return POKEMON_ENDPOINT + generated
+    })
+  }
+  const [urls, setURLs] = useState(genItems(9))
   useEffect(() => {
-    fetch (`${POKEAPI_URL}pokemon?limit=386&offset=0}`)
-      .then(res => res.json())
-      .then(data => setJSON(data))
-  }, [])
-  useEffect(() => {
-    console.log(json)
-    for (let i = 0; i < 386; i++) {
-      setPokedex(prevPokedex => [...prevPokedex, json])
+    window.onscroll = () => {
+      const isAtBottom = (window.scrollY + window.innerHeight) == document.documentElement.scrollHeight
+      if (isAtBottom && generated <= 386) {
+        setURLs(prevURLs => [...prevURLs, ...genItems(3)])
+      }
     }
-  }, [json])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
   return (
     <>
-      {pokedex.map(pokemon => (
-        <Card key={pokemon.id} pokemon={pokemon}></Card>
-      ))}
+      {urls.map((url, index) => {
+        return (
+          <Card key={index} url={url}/>
+        )
+      })}
     </>
   )
 }

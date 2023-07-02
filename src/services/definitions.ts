@@ -9,7 +9,3 @@ export type Pokemon = {
     }
   }
 }
-export type PokeJSON = {
-  count: number,
-  results: number[]
-}
