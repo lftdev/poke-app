@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+html, body {
+  height: 100%;
+  background-color: gray;
+}
+#root {
+  display: grid;
+  place-items: center;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  height: 100%;
+}
+.type-box {
+  @apply rounded-md text-center text-white;
+}
+.grass-type {
+  @apply bg-lime-600;
+}
+.poison-type {
+  @apply bg-purple-800;
+}
+.fire-type {
+  @apply bg-orange-600;
+}
+.flying-type {
+  @apply bg-sky-600;
+}
+.water-type {
+  @apply bg-blue-800;
+}
+.bug-type {
+  @apply bg-green-700;
+}
+.normal-type {
+  @apply bg-gray-500;
+}
+.electric-type {
+  @apply bg-yellow-500;
+}
+.ground-type {
+  @apply bg-amber-800;
+}
+.fairy-type {
+  @apply bg-pink-200;
+}
+.fighting-type {
+  @apply bg-red-600;
+}
+.psychic-type {
+  @apply bg-pink-400;
+}
+.rock-type {
+  @apply bg-yellow-700;
+}
+.dragon-type {
+  @apply bg-orange-400;
+}
+.ice-type {
+  @apply bg-blue-400;
+}

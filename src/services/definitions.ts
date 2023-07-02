@@ -8,4 +8,9 @@ export type Pokemon = {
       }
     }
   }
+  types: PokemonType[]
+}
+export type PokemonType = {
+  slot: number
+  type: {name: string}
 }

@@ -15,8 +15,8 @@ function App() {
   useEffect(() => {
     window.onscroll = () => {
       const isAtBottom = (window.scrollY + window.innerHeight) == document.documentElement.scrollHeight
-      if (isAtBottom && generated <= 386) {
-        setURLs(prevURLs => [...prevURLs, ...genItems(3)])
+      if (isAtBottom && generated < 151) {
+        setURLs(prevURLs => [...prevURLs, ...genItems(1)])
       }
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
