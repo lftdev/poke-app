@@ -1,11 +1,12 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Pokemon } from '../services/definitions'
+import { getDominantColor } from '../services/utils'
 
-interface CardProps {
-  url: string
-}
-function Card({url}: CardProps) {
+function Card({url}: {url: string}) {
   const [pokemon, setPokemon] = useState<Pokemon>()
+  const [dominantColor, setDominantColor] = useState('')
+  const coverAsideRef = useRef<HTMLElement | null>(null)
+  const imgRef = useRef<HTMLImageElement | null>(null)
   useEffect(() => {
     fetch(url)
       .then(res => res.json())
@@ -13,17 +14,28 @@ function Card({url}: CardProps) {
         setPokemon(data)
       })
   }, [url])
+  useEffect(() => {
+    if (imgRef !== null)
+      if (imgRef.current instanceof HTMLImageElement)
+        imgRef.current.onload = event =>
+          setDominantColor(getDominantColor(event.target as HTMLImageElement))
+  }, [pokemon])
+  useEffect(() => {
+    if (coverAsideRef !== null)
+      if (coverAsideRef.current instanceof HTMLElement)
+        coverAsideRef.current.style.backgroundColor = dominantColor
+  }, [dominantColor])
   return (
     <>
       {pokemon &&
         <div className='max-w-sm h-30 rounded-md bg-slate-200 p-5 flex justify-items-center items-center gap-10'>
-          <span>
+          <aside className='p-2 rounded-lg text-white text-center' ref={coverAsideRef}>
             <h2 className='text-2xl font-bold first-letter:capitalize'>{`${pokemon.name} #${pokemon.id}`}</h2>
             <div className='rounded-full bg-white p-8'>
-              <img className='pointer-events-none w-32 h-32 object-scale-down' src={pokemon.sprites.other.dream_world.front_default} alt={`${pokemon.name} image`}/>
+              <img className='pointer-events-none w-32 h-32 object-scale-down' src={pokemon.sprites.other.dream_world.front_default} alt={`${pokemon.name} image`} ref={imgRef}/>
             </div>
-          </span>
-          <span>
+          </aside>
+          <aside>
             <div className='flex flex-col gap-2'>
               <h3 className='text-lg font-bold'>Types</h3>
               {pokemon.types.map((typeObject, index) => {
@@ -33,7 +45,7 @@ function Card({url}: CardProps) {
                 )
               })}
             </div>
-          </span>
+          </aside>
         </div>
       }
     </>
