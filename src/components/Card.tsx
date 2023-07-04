@@ -1,8 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Pokemon } from '../services/definitions'
 import { getDominantColor } from '../services/utils'
-
-function Card({url}: {url: string}) {
+function Card({ url }: { url: string }) {
   const [pokemon, setPokemon] = useState<Pokemon>()
   const [dominantColor, setDominantColor] = useState('')
   const coverAsideRef = useRef<HTMLElement | null>(null)
@@ -15,15 +14,13 @@ function Card({url}: {url: string}) {
       })
   }, [url])
   useEffect(() => {
-    if (imgRef !== null)
-      if (imgRef.current instanceof HTMLImageElement)
-        imgRef.current.onload = event =>
-          setDominantColor(getDominantColor(event.target as HTMLImageElement))
+    if (imgRef.current instanceof HTMLImageElement)
+      imgRef.current.onload = event =>
+        setDominantColor(getDominantColor((event.target as HTMLImageElement), 8))
   }, [pokemon])
   useEffect(() => {
-    if (coverAsideRef !== null)
-      if (coverAsideRef.current instanceof HTMLElement)
-        coverAsideRef.current.style.backgroundColor = dominantColor
+    if (coverAsideRef.current instanceof HTMLElement)
+      coverAsideRef.current.style.backgroundColor = dominantColor
   }, [dominantColor])
   return (
     <>
@@ -32,7 +29,7 @@ function Card({url}: {url: string}) {
           <aside className='p-2 rounded-lg text-white text-center' ref={coverAsideRef}>
             <h2 className='text-2xl font-bold first-letter:capitalize'>{`${pokemon.name} #${pokemon.id}`}</h2>
             <div className='rounded-full bg-white p-8'>
-              <img className='pointer-events-none w-32 h-32 object-scale-down' src={pokemon.sprites.other.dream_world.front_default} alt={`${pokemon.name} image`} ref={imgRef}/>
+              <img className='pointer-events-none w-32 h-32 object-scale-down' src={pokemon.sprites.other.dream_world.front_default} alt={`${pokemon.name} image`} ref={imgRef} />
             </div>
           </aside>
           <aside>

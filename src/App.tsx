@@ -11,7 +11,7 @@ function App() {
       return POKEMON_ENDPOINT + generated
     })
   }
-  const [urls, setURLs] = useState(genItems(9))
+  const [urls, setURLs] = useState(genItems(2))
   useEffect(() => {
     window.onscroll = () => {
       const isAtBottom = (window.scrollY + window.innerHeight) == document.documentElement.scrollHeight
