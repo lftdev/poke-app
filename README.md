@@ -15,7 +15,7 @@ My Pokédex version using React and [PokéAPI](https://pokeapi.co/).
 
 ### Links
 
-- [Go to live site](https://hydrae-soft.github.io/poke-app/)
+- [Go to live site](https://lftdev.github.io/poke-app/)
 
 ## My process
 
@@ -39,6 +39,6 @@ My Pokédex version using React and [PokéAPI](https://pokeapi.co/).
 
 ## Author
 
-- Linkedin profile: [Lucas Franco Torres](https://www.linkedin.com/in/lucas-franco-torres-front-dev/)
+- Linkedin profile: [Lucas Franco Torres](https://www.linkedin.com/in/frontdev-lucastorres/)
 - Frontend Mentor: [@Ludroid](https://www.frontendmentor.io/profile/Ludroid)
-- GitHub profile: [hydrae-soft](https://github.com/hydrae-soft)
+- GitHub profile: [lftdev](https://github.com/lftdev)
